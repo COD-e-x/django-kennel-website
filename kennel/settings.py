@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/5.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
+
 import os
 from pathlib import Path
 
@@ -37,9 +38,8 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-
     # my app
-    'apps.users',
+    "apps.users",
 ]
 
 MIDDLEWARE = [
@@ -81,6 +81,7 @@ USER = os.getenv("MS_SQL_USER")
 PASSWORD = os.getenv("MS_SQL_KYE")
 HOST = os.getenv("MS_SQL_SERVER")
 DATABASE = os.getenv("MS_SQL_DATABASE")
+PAD_DATABASE = os.getenv("MS_PAD_DATABASE")
 DRIVER = os.getenv("MS_SQL_DRIVER")
 
 DATABASES = {
@@ -90,9 +91,7 @@ DATABASES = {
         "PASSWORD": PASSWORD,
         "HOST": HOST,
         "PORT": "",
-        "OPTIONS": {
-            "driver": DRIVER
-        }
+        "OPTIONS": {"driver": DRIVER},
     }
 }
 
@@ -134,3 +133,71 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+AUTH_USER_MODEL = "users.User"
+
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "formatters": {
+        "verbose": {
+            "format": "%(asctime)s - %(levelname)s - %(name)s - %(message)s",
+        },
+        "simple": {
+            "format": "%(levelname)s - %(name)s - %(message)s",
+        },
+        "error": {
+            "format": "%(asctime)s - %(levelname)s - %(name)s - %(lineno)d - %(message)s",
+        },
+    },
+    "handlers": {
+        # Обработчик для записи логов в файл
+        "file": {
+            "level": "INFO",
+            "class": "logging.FileHandler",
+            "filename": BASE_DIR / "logs/info-file.log",
+            "formatter": "verbose",
+            "encoding": "utf-8",
+        },
+        # Обработчик для вывода логов в консоль
+        "console": {
+            "level": "INFO",
+            "class": "logging.StreamHandler",
+            "formatter": "simple",
+        },
+        # Отдельный обработчик ERROR для записи подробных логов в файл
+        "error_file": {
+            "level": "ERROR",
+            "class": "logging.FileHandler",
+            "filename": BASE_DIR / "logs/error-file.log",
+            "formatter": "error",
+            "encoding": "utf-8",
+        },
+    },
+    "loggers": {
+        # logger для django
+        "django": {
+            "handlers": ["file", "console"],
+            "level": "INFO",
+            "propagate": False,
+        },
+        # logger для ошибок в django
+        "django.errors": {
+            "handlers": ["error_file"],
+            "level": "ERROR",
+            "propagate": False,
+        },
+        # logger для приложения users
+        "users": {
+            "handlers": ["file", "console"],
+            "level": "INFO",
+            "propagate": False,
+        },
+        # logger для ошибок в users
+        "users.errors": {
+            "handlers": ["error_file"],
+            "level": "ERROR",
+            "propagate": False,
+        },
+    },
+}
