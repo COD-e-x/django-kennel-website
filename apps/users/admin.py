@@ -11,6 +11,7 @@ class UserAdmin(admin.ModelAdmin):
         "email",
         "phone",
         "telegram",
+        "gender",
         "is_active",
         "date_joined",
         "last_login",
@@ -24,6 +25,7 @@ class UserAdmin(admin.ModelAdmin):
     search_fields = ("email", "phone", "telegram")
     list_filter = (
         "is_active",
+        "gender",
         "date_joined",
         "last_login",
     )
@@ -38,6 +40,7 @@ class UserAdmin(admin.ModelAdmin):
                     "email",
                     "phone",
                     "telegram",
+                    "gender",
                     "first_name",
                     "last_name",
                     "is_active",
