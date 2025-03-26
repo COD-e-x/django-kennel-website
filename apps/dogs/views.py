@@ -1,9 +1,8 @@
-from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponseRedirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 
-from apps.dogs.models import Breed, Dog
-from apps.dogs.forms import DogForm
+from .models import Breed, Dog
+from .forms import DogForm
 
 
 def index(request):
@@ -61,17 +60,33 @@ def dogs_list(request):
 
 
 def dog_create(request):
-    """
-    Обрабатывает создание новой собаки через форму.
-    Если форма валидна, сохраняет собаку и перенаправляет на список собак.
-    """
+    """Обрабатывает создание новой собаки через форму."""
     if request.method == "POST":
         form = DogForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect(reverse("dogs:dogs_list"))
+            return redirect("dogs:dogs_list")
+    else:
+        form = DogForm()
     return render(
         request,
         "dogs/dog/create.html",
-        {"form": DogForm()},
+        {"form": form, "dog": None},
+    )
+
+
+def dog_edit(request, dog_id):
+    """Обрабатывает редактирование собаки через форму."""
+    dog = get_object_or_404(Dog, id=dog_id)
+    if request.method == "POST":
+        form = DogForm(request.POST, request.FILES, instance=dog)
+        if form.is_valid():
+            form.save()
+            return redirect("dogs:dogs_list")
+    else:
+        form = DogForm(instance=dog)
+    return render(
+        request,
+        "dogs/dog/create.html",
+        {"form": form, "dog": dog},
     )
