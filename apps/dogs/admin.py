@@ -27,4 +27,4 @@ class DogAdmin(admin.ModelAdmin):
     )
     ordering = ("name",)
     search_fields = ("name",)
-    readonly_fields = ("photo",)
+    readonly_fields = ()
