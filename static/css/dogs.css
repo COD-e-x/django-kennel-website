@@ -216,6 +216,7 @@ input::-ms-clear {
     font-size: 0.875rem;
     padding: 3px 10px;
     margin: 10px 5px;
+    border-radius: 10px;
     box-shadow: 0 0 2px rgba(0, 0, 0, 1);
     transition: background-color 0.3s;
 }
@@ -250,20 +251,52 @@ input::-ms-clear {
 }
 
 .breeds--list__item {
+    min-width: 70%;
     display: flex;
     flex-direction: column;
+    /*flex-wrap: wrap;*/
     justify-content: space-between;
     align-items: flex-start;
     border: 1px solid #ddd;
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
     border-radius: 2px;
-    padding: 20px;
-    /*margin: 10px;*/
+    padding: 5px;
     background-color: #fff;
 }
 
+.breeds--list__item-img {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+}
+
+.breed--list__description{
+    width: 100%;
+    border: 1px solid gray;
+    border-radius: 10px;
+    padding: 5px;
+    margin: 5px 0;
+}
+
+.breeds--list__item-group {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+@media (max-width: 950px) {
+    .breeds--list__item-group {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center; /* Добавлено для лучшего выравнивания */
+    }
+}
+
 .breeds--list__item-text {
-    margin-bottom: 15px;
+    font-family: "Segoe UI", system-ui, sans-serif, sans-serif;
+    margin: 10px 5px;
+    font-weight: 500;
+    letter-spacing: 0.8px;
 }
 
 

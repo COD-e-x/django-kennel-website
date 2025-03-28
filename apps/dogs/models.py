@@ -15,6 +15,11 @@ class Breed(models.Model):
         verbose_name=_("Описание"),
         **NULLABLE_FOR_STRING,
     )
+    photo = models.ImageField(
+        upload_to="breed/",
+        **NULLABLE,
+        verbose_name=_("Фото"),
+    )
 
     class Meta:
         verbose_name = _("Порода собаки")

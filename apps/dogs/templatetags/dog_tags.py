@@ -3,7 +3,7 @@ from django import template
 register = template.Library()
 
 
-@register.filter()
+@register.filter
 def dogs_media(val):
     if val:
         return f"/media/{val}"

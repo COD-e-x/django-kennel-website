@@ -1,4 +1,5 @@
 {% extends 'dogs/base.html' %}
+{% load breed_tags %}
 
 {% block content %}
   {% include 'dogs/includes/title-top.html' %}
@@ -7,10 +8,14 @@
       <ul class="breeds--list__list">
         {% for breed in breeds %}
           <li class="breeds--list__item">
+            <img class="breeds--list__item-img" src="{{ breed.photo|breeds_media }}" alt="breed photo">
+            <div class="breed--list__description">{{ breed.description }}</div>
+            <div class="breeds--list__item-group">
             <p class="breeds--list__item-text">{{ breed.name }}</p>
             <a class="btn breeds--list__item-btn" href="{% url 'dogs:dogs_by_breed' breed.pk %}" type="button">
               К собакам
             </a>
+            </div>
           </li>
         {% endfor %}
       </ul>
