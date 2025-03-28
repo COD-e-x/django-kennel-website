@@ -1,5 +1,4 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.urls import reverse
 
 from .models import Breed, Dog
 from .forms import DogForm
@@ -75,9 +74,9 @@ def dog_create(request):
     )
 
 
-def dog_edit(request, dog_id):
+def dog_edit(request, pk: int):
     """Обрабатывает редактирование собаки через форму."""
-    dog = get_object_or_404(Dog, id=dog_id)
+    dog = get_object_or_404(Dog, pk=pk)
     if request.method == "POST":
         form = DogForm(request.POST, request.FILES, instance=dog)
         if form.is_valid():
@@ -89,4 +88,54 @@ def dog_edit(request, dog_id):
         request,
         "dogs/dog/create.html",
         {"form": form, "dog": dog},
+    )
+
+
+def dog_detail(request, pk: int):
+    """Отображает подробную информацию о собаке."""
+    dog_object = Dog.objects.get(pk=pk)
+    context = {
+        "dog": dog_object,
+        "title": f"Вы выбрали: {dog_object.name}. Порода {dog_object.breed.name}.",
+    }
+    return render(
+        request,
+        "dogs/dog/detail.html",
+        context,
+    )
+
+
+def dog_update(request, pk: int):
+    """Обновляет данные у собаки."""
+    dog_object = get_object_or_404(Dog, pk=pk)
+    if request.method == "POST":
+        form = DogForm(request.POST, request.FIELS, instance=dog_object)
+        if form.is_valid():
+            dog_object = form.save()
+            dog_object.save()
+            return redirect("dogs: dog_detail", args={pk: pk})
+    context = {
+        "dog": dog_object,
+        "form": DogForm(instance=dog_object),
+    }
+    return render(
+        request,
+        "dogs/dog/update.html",
+        context,
+    )
+
+
+def dog_delete(request, pk: int):
+    """Удаляет собаку."""
+    dog_object = get_object_or_404(Dog, pk=pk)
+    if request.method == "POST":
+        dog_object.delete()
+        return redirect("dogs:dogs_list")
+    context = {
+        "dog": dog_object,
+    }
+    return render(
+        request,
+        "dogs/dog/delete.html",
+        context,
     )
