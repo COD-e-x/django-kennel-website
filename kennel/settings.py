@@ -146,13 +146,16 @@ LOGGING = {
     "disable_existing_loggers": False,
     "formatters": {
         "verbose": {
-            "format": "%(asctime)s - %(levelname)s - %(name)s - %(message)s",
+            "format": "{asctime} - {levelname} - {name} - {message}",
+            "style": "{",
         },
         "simple": {
-            "format": "%(levelname)s - %(name)s - %(message)s",
+            "format": "{levelname} - {name} - {message}",
+            "style": "{",
         },
         "error": {
-            "format": "%(asctime)s - %(levelname)s - %(name)s - %(lineno)d - %(message)s",
+            "format": "{asctime} - {levelname} - {module} - {name} - {lineno:d} - {message}",
+            "style": "{",
         },
     },
     "handlers": {
@@ -187,22 +190,23 @@ LOGGING = {
             "propagate": False,
         },
         # logger для ошибок в django
-        "django.errors": {
-            "handlers": ["error_file"],
-            "level": "ERROR",
-            "propagate": False,
-        },
-        # logger для приложения users
-        "users": {
-            "handlers": ["file", "console"],
-            "level": "INFO",
-            "propagate": False,
-        },
-        # logger для ошибок в users
-        "users.errors": {
+        "django.request": {
             "handlers": ["error_file"],
             "level": "ERROR",
             "propagate": False,
         },
     },
 }
+
+# apps = ["users", "dogs"]
+# for app in apps:
+#     LOGGING["loggers"][app] = {
+#         "handlers": ["file", "console"],
+#         "level": "INFO",
+#         "propagate": False,
+#     }
+#     LOGGING["loggers"][f"{app}.errors"] = {
+#         "handlers": ["error_file"],
+#         "level": "ERROR",
+#         "propagate": False,
+#     }
