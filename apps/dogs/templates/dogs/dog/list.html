@@ -1,10 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Title</title>
-</head>
-<body>
+{% extends 'dogs/base.html' %}
+{% load dog_tags %}
 
-</body>
-</html>
+{% block content %}
+  {% include 'dogs/includes/title-top.html' %}
+  <section class="dog--list">
+    <div class="container">
+      <ul class="dog--list__list">
+        {% for dog in dogs %}
+          <li class="dog--list__item">
+            <img class="dog--list__item-img" src="{{ dog.photo|dogs_media }}" alt="dog photo">
+            <p class="dog--list__item-text">{{ dog.name }}</p>
+            <a class="btn dog--list__item-btn" href="{% url 'dogs:dog_detail' dog.pk %}" type="button">
+              Подробнее
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </section>
+{% endblock %}

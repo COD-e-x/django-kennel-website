@@ -1,10 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Title</title>
-</head>
-<body>
+{% extends 'dogs/base.html' %}
 
-</body>
-</html>
+{% block content %}
+  {% include 'dogs/includes/title-top.html' %}
+  <section class="breeds--list">
+    <div class="container">
+      <ul class="breeds--list__list">
+        {% for breed in breeds %}
+          <li class="breeds--list__item">
+            <p class="breeds--list__item-text">{{ breed.name }}</p>
+            <a class="btn breeds--list__item-btn" href="{% url 'dogs:dogs_by_breed' breed.pk %}" type="button">
+              К собакам
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </section>
+{% endblock %}
