@@ -1,0 +1,31 @@
+{% load static %}
+<header class="header">
+  <div class="container">
+    <div class="header__inner">
+      <a href="{% url 'dogs:index' %}" class="header__logo">
+        <img class="header__logo-img" src="{% static 'images/logo.svg' %}" alt="logo">
+      </a>
+      <nav class="header__menu">
+        <ul class="header__menu-list">
+          <li class="header__menu-item">
+            <a class="header__menu-link {% if request.path == '/' %}header__menu-link--active{% endif %}"
+               href="{% url 'dogs:index' %}">Главная</a>
+          </li>
+          <li class="header__menu-item">
+            <a class="header__menu-link {% if request.path == '/breeds/' %}header__menu-link--active{% endif %}"
+               href="{% url 'dogs:breeds' %}">Породы</a>
+          </li>
+          <li class="header__menu-item">
+            <a class="header__menu-link {% if request.path == '/dogs/' %}header__menu-link--active{% endif %}"
+               href="{% url 'dogs:dogs_list' %}">Собаки</a>
+          </li>
+          <li class="header__menu-item">
+            <a class="header__menu-link {% if request.path == '/dogs/create/' %}header__menu-link--active{% endif %}"
+               href="{% url 'dogs:dog_create' %}">Добавить
+              собаку</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>
