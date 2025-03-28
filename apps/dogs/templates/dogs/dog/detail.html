@@ -5,7 +5,7 @@
   {% include 'dogs/includes/title-top.html' %}
   <section class="dog--detail">
     <div class="container">
-      <dog class="dog--detail__wrapper">
+      <div class="dog--detail__wrapper">
         <div class="dog--detail__item">
           <img class="dog--detail__item-img" src="{{ dog.photo|dogs_media }}" alt="dog photo">
           <div class="dog--detail__group-info">
@@ -23,7 +23,7 @@
           </a>
           {#          </dif>#}
         </div>
-      </dog>
+      </div>
     </div>
   </section>
 {% endblock %}
