@@ -1,10 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Title</title>
-</head>
-<body>
+{% extends 'dogs/base.html' %}
 
-</body>
-</html>
+{% block content %}
+  <form class="dog--form" method="post" enctype="multipart/form-data">
+  <div class="dog--form__title">
+    {% if dog %}
+      Редактирование собаки: {{ dog.name }}
+    {% else %}
+      Добавление новой собаки
+    {% endif %}
+  </div>
+    {% csrf_token %}
+    <div class="dog--form__form-group">
+      {% for field in form %}
+        <div class="dog--form__form-group-field">
+          <label for="{{ field.id_for_label }}" class="dog-form__form-group-label">
+            {{ field.label }}
+          </label>
+        <div class="dog--form__from-group-field">
+          {{ field }}
+        </div>
+          {% if field.errors %}
+            <div class="dog--form__form-group-error">
+              {{ field.errors }}
+            </div>
+          {% endif %}
+        </div>
+      {% endfor %}
+    <button class="btn dog--form__btn" type="submit">
+      {% if dog %}
+        Сохранить
+      {% else %}
+        Добавить
+      {% endif %}
+    </button>
+    </div>
+  </form>
+{% endblock %}

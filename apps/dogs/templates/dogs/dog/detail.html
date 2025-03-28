@@ -1,10 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Title</title>
-</head>
-<body>
+{% extends 'dogs/base.html' %}
+{% load dog_tags %}
 
-</body>
-</html>
+{% block content %}
+  {% include 'dogs/includes/title-top.html' %}
+  <section class="dog--detail">
+    <div class="container">
+      <dog class="dog--detail__wrapper">
+        <div class="dog--detail__item">
+          <p class="dog--detail__item-text">{{ dog.name }}</p>
+          <img class="dog--detail__item-img" src="{{ dog.photo|dogs_media }}" alt="dog photo">
+          <a class="btn dog--detail__item-btn" href="{% url 'dogs:dog_edit' dog.pk %}" type="button">
+            Редактировать
+          </a>
+          <a class="btn dog--detail__item-btn" href="{% url 'dogs:dog_delete' dog.pk %}" type="button">
+            Удалить
+          </a>
+        </div>
+      </dog>
+    </div>
+  </section>
+{% endblock %}
