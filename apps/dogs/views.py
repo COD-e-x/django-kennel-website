@@ -74,29 +74,14 @@ def dog_create(request):
     )
 
 
-def dog_edit(request, pk: int):
-    """Обрабатывает редактирование собаки через форму."""
-    dog = get_object_or_404(Dog, pk=pk)
-    if request.method == "POST":
-        form = DogForm(request.POST, request.FILES, instance=dog)
-        if form.is_valid():
-            form.save()
-            return redirect("dogs:dogs_list")
-    else:
-        form = DogForm(instance=dog)
-    return render(
-        request,
-        "dogs/dog/create.html",
-        {"form": form, "dog": dog},
-    )
-
-
 def dog_detail(request, pk: int):
     """Отображает подробную информацию о собаке."""
     dog_object = Dog.objects.get(pk=pk)
+    breed_name = dog_object.breed.name
     context = {
         "dog": dog_object,
-        "title": f"Вы выбрали: {dog_object.name}. Порода {dog_object.breed.name}.",
+        "title": f"Вы выбрали: {dog_object.name}.",
+        "breed_name": f"Порода {breed_name}",
     }
     return render(
         request,
