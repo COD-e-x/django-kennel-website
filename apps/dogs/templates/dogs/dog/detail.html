@@ -7,14 +7,21 @@
     <div class="container">
       <dog class="dog--detail__wrapper">
         <div class="dog--detail__item">
-          <p class="dog--detail__item-text">{{ dog.name }}</p>
           <img class="dog--detail__item-img" src="{{ dog.photo|dogs_media }}" alt="dog photo">
-          <a class="btn dog--detail__item-btn" href="{% url 'dogs:dog_edit' dog.pk %}" type="button">
+          <div class="dog--detail__group-info">
+            <p>{{ breed_name }}</p>
+            <p class="dog--detail__item-text dog--detail__item-name">{{ dog.name }}</p>
+            <p
+              class="dog--detail__item-text dog--detail__item-birth_date">{{ dog.birth_date|default:""|date:"d F Y" }}</p>
+          </div>
+          {#          <dif class="dog--detail__group-btn">#}
+          <a class="btn dog--detail__item-btn" href="{% url 'dogs:dog_update' dog.pk %}" type="button">
             Редактировать
           </a>
           <a class="btn dog--detail__item-btn" href="{% url 'dogs:dog_delete' dog.pk %}" type="button">
             Удалить
           </a>
+          {#          </dif>#}
         </div>
       </dog>
     </div>
