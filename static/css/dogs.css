@@ -39,6 +39,7 @@ a {
 
 a:hover {
     text-decoration: none;
+    cursor: pointer;
 }
 
 nav, footer, header, aside {
@@ -270,8 +271,9 @@ input::-ms-clear {
     object-fit: cover;
 }
 
-.breed--list__description{
+.breed--list__description {
     width: 100%;
+    height: 100%;
     border: 1px solid gray;
     border-radius: 10px;
     padding: 5px;
@@ -288,7 +290,7 @@ input::-ms-clear {
     .breeds--list__item-group {
         flex-direction: column;
         align-items: center;
-        justify-content: center; /* Добавлено для лучшего выравнивания */
+        justify-content: center;
     }
 }
 
@@ -357,7 +359,6 @@ input::-ms-clear {
     width: 30%;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
     align-items: flex-start;
     border: 1px solid #ddd;
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
@@ -367,18 +368,31 @@ input::-ms-clear {
     background-color: #fff;
 }
 
+.dog--detail__item-img {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+}
+
+.dog--detail__group-info {
+    margin-left: 5px;
+    width: 100%;
+}
 
 .dog--detail__item-text {
     margin-bottom: 5px;
     letter-spacing: 0.8px;
     font-weight: 600;
-
 }
 
-.dog--detail__item-img {
+.dog--detail__item-birth_date {
+    font-style: italic;
+}
+
+.dog--detail__group-btn {
     width: 100%;
-    aspect-ratio: 4 / 5;
-    object-fit: cover;
+    display: flex;
+    justify-content: space-between;
 }
 
 .dog--detail__item-btn {
@@ -412,6 +426,11 @@ input::-ms-clear {
     font-size: 1rem;
     font-weight: bold;
     margin-bottom: 5px;
+}
+
+
+.custom-file-label {
+    color: #165cc6;
 }
 
 .dog--form__from-group-field input, select, textarea {
