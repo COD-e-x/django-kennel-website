@@ -18,7 +18,7 @@
             <label for="{{ field.id_for_label }}" class="dog-form__form-group-label">
               {{ field.label }}
             </label>
-            <small class="custom-file-label"> <br>*размер фото не более: 5MB. разрешённые форматы: .jpg, .jpeg, .png.</small>
+            <small class="custom-file-label"> <br>*размер фото не более: 5MB, разрешённые форматы: .jpg, .jpeg, .png.</small>
           {% else %}
             <label for="{{ field.id_for_label }}" class="dog-form__form-group-label">
               {{ field.label }}
@@ -28,7 +28,7 @@
               {{ field }}
           </div>
           {% if field.errors %}
-            <div class="dog--form__form-group-error">
+            <div class="form__form-group-error dog--form__form-group-error">
               {{ field.errors }}
             </div>
           {% endif %}
