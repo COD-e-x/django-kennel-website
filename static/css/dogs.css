@@ -108,7 +108,7 @@ input::-ms-clear {
 .header__nav {
     display: flex;
     justify-content: space-between;
-    gap: 30px;
+    gap: 70px;
 }
 
 .header__menu-list--text {
