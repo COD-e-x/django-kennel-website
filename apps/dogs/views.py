@@ -1,3 +1,4 @@
+from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 
 from .models import Breed, Dog
@@ -94,7 +95,7 @@ def dog_update(request, pk: int):
     """Обновляет данные у собаки."""
     dog_object = get_object_or_404(Dog, pk=pk)
     if request.method == "POST":
-        form = DogForm(request.POST, request.FIELS, instance=dog_object)
+        form = DogForm(request.POST, request.FIELES, instance=dog_object)
         if form.is_valid():
             dog_object = form.save()
             dog_object.save()
@@ -110,17 +111,40 @@ def dog_update(request, pk: int):
     )
 
 
+def dog_delete_confirm(request, pk: int):
+    """Показывает кнопки подтверждения удаления."""
+    dog_object = get_object_or_404(Dog, pk=pk)
+    return render(
+        request,
+        "dogs/includes/confirm-delete-buttons.html",
+        {"dog": dog_object},
+    )
+
+
+def dog_delete_abort(request, pk):
+    """Отмена удаления собаки."""
+    dog_object = get_object_or_404(Dog, pk=pk)
+    return render(
+        request,
+        "dogs/includes/dog-detail-buttons.html",
+        {"dog": dog_object},
+    )
+
+
 def dog_delete(request, pk: int):
     """Удаляет собаку."""
     dog_object = get_object_or_404(Dog, pk=pk)
     if request.method == "POST":
         dog_object.delete()
-        return redirect("dogs:dogs_list")
+        if "HX-Request" in request.headers:
+            response = HttpResponse()
+            response["HX-Redirect"] = "/dogs/"
+            return response
     context = {
         "dog": dog_object,
     }
     return render(
         request,
-        "dogs/dog/delete.html",
+        "dogs/dog/detail.html",
         context,
     )
