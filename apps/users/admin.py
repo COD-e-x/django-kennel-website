@@ -8,6 +8,8 @@ from apps.users.models import User
 class UserAdmin(admin.ModelAdmin):
     list_display = (
         "id",
+        "last_name",
+        "first_name",
         "email",
         "phone",
         "telegram",

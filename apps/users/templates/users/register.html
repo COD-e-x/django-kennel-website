@@ -1,0 +1,39 @@
+{% extends 'dogs/base.html' %}
+
+{% block content %}
+  <form class="form user--form" method="post" enctype="multipart/form-data">
+    <div class="form__title user--form__title">
+      Форма регистрации пользователя.
+{#      {% if user %}#}
+{#        ?#}
+{#      {% else %}#}
+{#        ?#}
+{#      {% endif %}#}
+    </div>
+    {% csrf_token %}
+    <div class="form__form-group user--form__form-group">
+      {% for field in form %}
+        <div class="form__form-group-field user--form__form-group-field">
+            <label for="{{ field.id_for_label }}" class="form__form-group-label user--form__form-group-label">
+              {{ field.label }}
+            </label>
+          <div class="form__from-group-field user--form__from-group-field">
+              {{ field }}
+          </div>
+          {% if field.errors %}
+            <div class="form__form-group-error user--form__form-group-error">
+              {{ field.errors }}
+            </div>
+          {% endif %}
+        </div>
+      {% endfor %}
+      <button class="btn form__btn user--form__btn" type="submit">
+        {% if dog %}
+          Сохранить
+        {% else %}
+          Добавить
+        {% endif %}
+      </button>
+    </div>
+  </form>
+{% endblock %}
