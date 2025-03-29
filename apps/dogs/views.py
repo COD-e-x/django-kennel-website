@@ -1,5 +1,5 @@
 from django.http import HttpResponse
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, reverse, redirect, get_object_or_404
 
 from .models import Breed, Dog
 from .forms import DogForm
@@ -95,11 +95,11 @@ def dog_update(request, pk: int):
     """Обновляет данные у собаки."""
     dog_object = get_object_or_404(Dog, pk=pk)
     if request.method == "POST":
-        form = DogForm(request.POST, request.FIELES, instance=dog_object)
+        form = DogForm(request.POST, request.FILES, instance=dog_object)
         if form.is_valid():
             dog_object = form.save()
             dog_object.save()
-            return redirect("dogs: dog_detail", args={pk: pk})
+            return redirect(reverse("dogs:dog_detail", args=[pk]))
     context = {
         "dog": dog_object,
         "form": DogForm(instance=dog_object),
