@@ -14,14 +14,7 @@
             <p
               class="dog--detail__item-text dog--detail__item-birth_date">{{ dog.birth_date|default:""|date:"d F Y" }}</p>
           </div>
-          {#          <dif class="dog--detail__group-btn">#}
-          <a class="btn dog--detail__item-btn" href="{% url 'dogs:dog_update' dog.pk %}" type="button">
-            Редактировать
-          </a>
-          <a class="btn dog--detail__item-btn" href="{% url 'dogs:dog_delete' dog.pk %}" type="button">
-            Удалить
-          </a>
-          {#          </dif>#}
+          {% include 'dogs/includes/dog-detail-buttons.html' %}
         </div>
       </div>
     </div>
