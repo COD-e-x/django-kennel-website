@@ -228,9 +228,6 @@ input::-ms-clear {
     padding: 30px 0 30px 0;
 }
 
-.form__form-group-error {
-    color: red;
-}
 
 /*===== btn ==========================================================================================================*/
 
@@ -259,6 +256,64 @@ input::-ms-clear {
 .btn:active {
     background-color: #165cc6;
     transform: translateY(1px);
+}
+
+/*===== dog form =====================================================================================================*/
+
+.form {
+    max-width: 400px;
+    margin: 20px auto;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #EFF2F6;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.form__title {
+    text-align: center;
+}
+
+.form__form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 10px;
+}
+
+.form__from-group-field input, select, textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.form__form-group-label {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.form__btn {
+    background-color: #165cc6;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    margin: 0 auto;
+    font-size: 1rem;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 1);
+    transition: background-color 0.3s;
+}
+
+.form__form-group-error {
+    color: red;
+}
+
+
+/* dog */
+.dog--form__custom-file-label {
+    color: #165cc6;
 }
 
 /*===== breed list ===================================================================================================*/
@@ -423,71 +478,4 @@ input::-ms-clear {
     margin-top: 10px;
 }
 
-/*===== dog form =====================================================================================================*/
-
-.dog--form {
-    max-width: 500px;
-    margin: 20px auto;
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    background-color: #EFF2F6;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.dog--form__title {
-    text-align: center;
-}
-
-.dog--form__form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    padding: 10px;
-}
-
-.dog--form__form-group-label {
-    font-size: 1rem;
-    font-weight: bold;
-    margin-bottom: 5px;
-}
-
-
-.custom-file-label {
-    color: #165cc6;
-}
-
-.dog--form__from-group-field input, select, textarea {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 1rem;
-}
-
-.dog--form__btn {
-    background-color: #165cc6;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    margin: 0 auto;
-    font-size: 1rem;
-    box-shadow: 0 0 2px rgba(0, 0, 0, 1);
-    transition: background-color 0.3s;
-}
-
-.dog--form__btn:hover {
-    background-color: #165cc6;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
-    transform: translateY(-1px);
-}
-
-.dog--form__btn:focus {
-    box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
-}
-
-.dog--form__btn:active {
-    background-color: #165cc6;
-    transform: translateY(1px);
-}
 

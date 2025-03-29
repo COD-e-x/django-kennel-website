@@ -1,8 +1,8 @@
 {% extends 'dogs/base.html' %}
 
 {% block content %}
-  <form class="dog--form" method="post" enctype="multipart/form-data">
-    <div class="dog--form__title">
+  <form class="form dog--form" method="post" enctype="multipart/form-data">
+    <div class="form__title dog--form__title">
       {% if dog %}
         Редактирование собаки: {{ dog.name }}
       {% else %}
@@ -10,30 +10,30 @@
       {% endif %}
     </div>
     {% csrf_token %}
-    <div class="dog--form__form-group">
+    <div class="form__form-group dog--form__form-group">
       {% for field in form %}
-        <div class="dog--form__form-group-field">
-          <label for="{{ field.id_for_label }}" class="dog-form__form-group-label">
+        <div class="form__form-group-field dog--form__form-group-field">
+          <label class="form__form-group-label dog-form__form-group-label" for="{{ field.id_for_label }}">
             {{ field.label }}
           </label>
-          <div class="dog--form__from-group-field">
+          <div class="form__from-group-field dog--form__from-group-field">
              {% if field.name == "photo" %}
-              <label for="{{ field.id_for_label }}" class="custom-file-label">
-                Выберите файл, если нужно заменить фото!
+              <label for="{{ field.id_for_label }}" class="dog--form__custom-file-label">
+                Выберите файл, если хотите изменить фото!
               </label>
-              <input type="file" name="{{ field.name }}" id="{{ form.file }}" class="custom-file-input">
+              <input type="file" name="{{ field.name }}" id="{{ form.file }}" class="dog--form__custom-file-input--update">
             {% else %}
               {{ field }}
             {% endif %}
           </div>
           {% if field.errors %}
-            <div class="dog--form__form-group-error">
+            <div class="form__form-group-error dog--form__form-group-error">
               {{ field.errors }}
             </div>
           {% endif %}
         </div>
       {% endfor %}
-      <button class="btn dog--form__btn" type="submit">
+      <button class="btn form__btn dog--form__btn" type="submit">
         {% if dog %}
           Сохранить
         {% else %}
