@@ -9,25 +9,33 @@ NULLABLE_FOR_STRING = {"null": False, "blank": True}
 
 class User(AbstractUser):
     username = None
-    email = models.EmailField(unique=True, verbose_name=_("Эл. почта"))
+    first_name = models.CharField(
+        max_length=30,
+        **NULLABLE_FOR_STRING,
+        verbose_name=_("Имя"),
+    )
+    last_name = models.CharField(
+        max_length=30,
+        **NULLABLE_FOR_STRING,
+        verbose_name=_("Фамилия"),
+    )
+    email = models.EmailField(
+        unique=True,
+        verbose_name=_("Эл. почта"),
+    )
     phone = models.CharField(
         max_length=35,
         verbose_name=_("Номер телефона"),
         **NULLABLE_FOR_STRING,
     )
     telegram = models.CharField(
-        max_length=150,
+        max_length=50,
         verbose_name=_("Телеграм"),
         **NULLABLE_FOR_STRING,
     )
     birth_date = models.DateField(
         **NULLABLE,
         verbose_name=_("Дата рождения"),
-    )
-    address = models.CharField(
-        max_length=255,
-        **NULLABLE_FOR_STRING,
-        verbose_name=_("Адрес"),
     )
     gender = models.CharField(
         max_length=1,
@@ -42,6 +50,21 @@ class User(AbstractUser):
         **NULLABLE,
         verbose_name=_("Фото профиля"),
     )
+    address = models.CharField(
+        max_length=255,
+        **NULLABLE_FOR_STRING,
+        verbose_name=_("Адрес"),
+    )
+    # role = models.CharField(
+    #     max_length=20,
+    #     choices=[
+    #         ("user", _("Пользователь")),
+    #         ("moderator", _("Модератор")),
+    #         ("admin", _("Администратор")),
+    #     ],
+    #     default="user",
+    #     verbose_name=_("Роль"),
+    # )
     status = models.CharField(
         max_length=10,
         choices=[
@@ -57,6 +80,7 @@ class User(AbstractUser):
         verbose_name=_("Активен"),
     )
 
+    # email_verified = models.BooleanField(default=False, verbose_name=_("Email подтверждён"))
     # phone_verified = models.BooleanField(default=False, verbose_name=_("Телефон подтверждён"))
     # telegram_verified = models.BooleanField(default=False, verbose_name=_("Telegram подтверждён"))
 

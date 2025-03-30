@@ -14,24 +14,35 @@ class UserAdmin(admin.ModelAdmin):
         "phone",
         "telegram",
         "gender",
+        "profile_picture",
         "is_active",
         "date_joined",
         "last_login",
     )
-    list_display_links = ("id", "email")
+    list_display_links = (
+        "id",
+        "email",
+    )
     list_editable = (
         "is_active",
         "phone",
         "telegram",
     )
-    search_fields = ("email", "phone", "telegram")
+    search_fields = (
+        "email",
+        "phone",
+        "telegram",
+    )
     list_filter = (
         "is_active",
         "gender",
         "date_joined",
         "last_login",
     )
-    readonly_fields = ("date_joined", "last_login")
+    readonly_fields = (
+        "date_joined",
+        "last_login",
+    )
     ordering = ("id",)
 
     fieldsets = (
@@ -45,6 +56,7 @@ class UserAdmin(admin.ModelAdmin):
                     "gender",
                     "first_name",
                     "last_name",
+                    "profile_picture",
                     "is_active",
                 )
             },
