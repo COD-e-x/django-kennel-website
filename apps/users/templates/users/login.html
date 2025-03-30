@@ -2,32 +2,38 @@
 {% block content %}
   <form class="form user--form"
         method="post"
-        enctype="multipart/form-data"
   >
     <div class="form__title user--form__title">
-      Регистрации пользователя
+      Войдите в свою учетную запись
     </div>
     {% csrf_token %}
     <div class="form__form-group user--form__form-group">
       {% for field in form %}
         <div class="form__form-group-field user--form__form-group-field">
-            <label class="form__form-group-label user--form__form-group-label"
-                   for="{{ field.id_for_label }}"
-            >
-              {{ field.label }}
-            </label>
+          <label class="form__form-group-label user--form__form-group-label"
+                 for="{{ field.id_for_label }}"
+          >
+            {{ field.label }}
+          </label>
           <div class="form__from-group-field user--form__from-group-field">
-              {{ field }}
+            {{ field }}
           </div>
           {% if field.errors %}
             <div class="form__form-group-error user--form__form-group-error">
               {{ field.errors }}
             </div>
           {% endif %}
+          {% if field.name == "password" and  form.non_field_errors %}
+            <div class="form__form-group-error form__form-group-error--login">
+              {% for error in form.non_field_errors %}
+                <p>{{ error }}</p>
+              {% endfor %}
+            </div>
+          {% endif %}
         </div>
       {% endfor %}
       <button class="btn form__btn user--form__btn" type="submit">
-        Добавить
+        Войти
       </button>
     </div>
   </form>
