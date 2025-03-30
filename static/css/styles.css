@@ -162,10 +162,25 @@ input::-ms-clear {
     padding: 5px;
 }
 
-
-.user--login {
-    color: #fff;
+.header__user-info--auth {
+    display: flex;
+    justify-content: right;
+    margin-bottom: 30px;
 }
+
+.header__icon--user-profile {
+    color: #fff;
+    text-transform: lowercase ;
+}
+
+.header__icon-image:hover {
+    transform: translate(-8%, -8%);
+}
+
+.header__icon-image:active {
+    transform: translate(0%, 0%);
+}
+
 
 /*===== footer =======================================================================================================*/
 

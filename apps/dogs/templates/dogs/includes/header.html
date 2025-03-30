@@ -20,8 +20,10 @@
                href="{% url 'dogs:dogs_list' %}">Собаки</a>
           </li>
         </ul>
-        <div>
-          <small class="user--login">{{ user.email }}</small>
+        <div class="header__user-info">
+          <div class="header__user-info--auth">
+            <a href="{% url 'users:profile' %}" class="header__menu-link header__icon--user-profile"><small class="header__icon-image">{{ user.email }}</small></a>
+          </div>
           <ul class="header__menu-list header__menu-list--icon">
             {% if user.is_authenticated %}
               {#            Профиль#}
