@@ -50,12 +50,13 @@ class UserAdmin(admin.ModelAdmin):
             None,
             {
                 "fields": (
+                    "first_name",
+                    "last_name",
                     "email",
                     "phone",
                     "telegram",
+                    "birth_date",
                     "gender",
-                    "first_name",
-                    "last_name",
                     "profile_picture",
                     "is_active",
                 )
