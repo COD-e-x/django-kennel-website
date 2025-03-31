@@ -1,6 +1,5 @@
 from django.shortcuts import render, redirect, reverse
 from django.contrib.auth import authenticate, login, logout
-import logging
 
 from .forms import UserRegisterForm, UserLoginForm
 
@@ -12,7 +11,7 @@ def user_register(request):
             new_user = form.save(commit=False)
             new_user.set_password(form.cleaned_data["password"])
             new_user.save()
-            return redirect("dogs:index")
+            return redirect("users:login")
     context = {
         "title": "Создать аккаунт",
         "form": form,
@@ -37,7 +36,7 @@ def user_login(request):
             )
             if user:
                 login(request, user)
-                return redirect("dogs:index")
+                return redirect("users:profile")
     context = {
         "form": form,
     }
@@ -46,3 +45,19 @@ def user_login(request):
         "users/login.html",
         context,
     )
+
+
+def user_profile(request):
+    context = {
+        "title": f"Ваш профиль",
+    }
+    return render(
+        request,
+        "users/profile.html",
+        context,
+    )
+
+
+def user_logout(request):
+    logout(request)
+    return redirect("dogs:index")

@@ -1,3 +1,5 @@
+import os
+
 from django.http import HttpResponse
 from django.shortcuts import render, reverse, redirect, get_object_or_404
 
@@ -135,6 +137,10 @@ def dog_delete(request, pk: int):
     """Удаляет собаку."""
     dog_object = get_object_or_404(Dog, pk=pk)
     if request.method == "POST":
+        if dog_object.photo:
+            file_path = dog_object.photo.path
+            if os.path.exists(file_path):
+                os.remove(file_path)
         dog_object.delete()
         if "HX-Request" in request.headers:
             response = HttpResponse()

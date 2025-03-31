@@ -78,3 +78,10 @@ class UserLoginForm(forms.Form):
                 logger.warning(f"Аккаунт заблокирован для {email}")
                 raise ValidationError("Этот аккаунт заблокирован!")
         return cleaned_data
+
+
+class UserForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = "__all__"
+        exclude = ("is_active", "status")
