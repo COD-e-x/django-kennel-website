@@ -44,6 +44,7 @@ class User(AbstractUser):
             ("Ж", _("Женский")),
         ],
         verbose_name=_("Пол"),
+        **NULLABLE,
     )
     profile_picture = models.ImageField(
         upload_to="profile_pictures/",
