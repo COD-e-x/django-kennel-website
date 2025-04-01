@@ -1,3 +1,4 @@
+import re
 from django import forms
 from django.core.exceptions import ValidationError
 from django.core.validators import validate_email
@@ -24,6 +25,13 @@ class UserRegisterForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ("email",)
+
+    def clean_password(self):
+        """Валидация пароля (только английские буквы)."""
+        password = self.cleaned_data.get("password")
+        if not re.fullmatch(r"[A-Za-z0-9@#$%^&+=!*()-]+", password):
+            raise ValidationError("Пароль должен содержать английские буквы, цифры или %^&+=!*()-!")
+        return password
 
     def clean_password2(self):
         """Валидация пароля."""
