@@ -144,62 +144,62 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 AUTH_USER_MODEL = "users.User"
 
 
-LOGGING = {
-    "version": 1,
-    "disable_existing_loggers": False,
-    "formatters": {
-        "verbose": {
-            "format": "{asctime} - {levelname} - {name} - {message}",
-            "style": "{",
-        },
-        "simple": {
-            "format": "{levelname} - {name} - {message}",
-            "style": "{",
-        },
-        "error": {
-            "format": "{asctime} - {levelname} - {module} - {name} - {lineno:d} - {message}",
-            "style": "{",
-        },
-    },
-    "handlers": {
-        # Обработчик для записи логов в файл
-        "file": {
-            "level": "INFO",
-            "class": "logging.FileHandler",
-            "filename": BASE_DIR / "logs/info-file.log",
-            "formatter": "verbose",
-            "encoding": "utf-8",
-        },
-        # Обработчик для вывода логов в консоль
-        "console": {
-            "level": "INFO",
-            "class": "logging.StreamHandler",
-            "formatter": "simple",
-        },
-        # Отдельный обработчик ERROR для записи подробных логов в файл
-        "error_file": {
-            "level": "ERROR",
-            "class": "logging.FileHandler",
-            "filename": BASE_DIR / "logs/error-file.log",
-            "formatter": "error",
-            "encoding": "utf-8",
-        },
-    },
-    "loggers": {
-        # logger для django
-        "django": {
-            "handlers": ["file", "console"],
-            "level": "INFO",
-            "propagate": False,
-        },
-        # logger для ошибок в django
-        "django.request": {
-            "handlers": ["error_file"],
-            "level": "ERROR",
-            "propagate": False,
-        },
-    },
-}
+# LOGGING = {
+#     "version": 1,
+#     "disable_existing_loggers": False,
+#     "formatters": {
+#         "verbose": {
+#             "format": "{asctime} - {levelname} - {name} - {message}",
+#             "style": "{",
+#         },
+#         "simple": {
+#             "format": "{levelname} - {name} - {message}",
+#             "style": "{",
+#         },
+#         "error": {
+#             "format": "{asctime} - {levelname} - {module} - {name} - {lineno:d} - {message}",
+#             "style": "{",
+#         },
+#     },
+#     "handlers": {
+#         # Обработчик для записи логов в файл
+#         "file": {
+#             "level": "INFO",
+#             "class": "logging.FileHandler",
+#             "filename": BASE_DIR / "logs/info-file.log",
+#             "formatter": "verbose",
+#             "encoding": "utf-8",
+#         },
+#         # Обработчик для вывода логов в консоль
+#         "console": {
+#             "level": "INFO",
+#             "class": "logging.StreamHandler",
+#             "formatter": "simple",
+#         },
+#         # Отдельный обработчик ERROR для записи подробных логов в файл
+#         "error_file": {
+#             "level": "ERROR",
+#             "class": "logging.FileHandler",
+#             "filename": BASE_DIR / "logs/error-file.log",
+#             "formatter": "error",
+#             "encoding": "utf-8",
+#         },
+#     },
+#     "loggers": {
+#         # logger для django
+#         "django": {
+#             "handlers": ["file", "console"],
+#             "level": "INFO",
+#             "propagate": False,
+#         },
+#         # logger для ошибок в django
+#         "django.request": {
+#             "handlers": ["error_file"],
+#             "level": "ERROR",
+#             "propagate": False,
+#         },
+#     },
+# }
 
 # apps = ["users", "dogs"]
 # for app in apps:

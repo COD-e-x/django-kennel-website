@@ -5,10 +5,6 @@ from django.core.validators import validate_email
 from django.contrib.auth import authenticate
 from .models import User
 
-import logging
-
-logger = logging.getLogger(__name__)
-
 
 class UserRegisterForm(forms.ModelForm):
     password = forms.CharField(
@@ -77,13 +73,10 @@ class UserLoginForm(forms.Form):
         email = cleaned_data.get("email")
         password = cleaned_data.get("password")
         if email and password:
-            logger.info(f"if email and password - email: {email}")
             user = authenticate(email=email, password=password)
             if not user:
-                logger.error(f"Неверный email или пароль для {email}")
                 raise ValidationError("Неверный email или пароль!")
             if not user.is_active:
-                logger.warning(f"Аккаунт заблокирован для {email}")
                 raise ValidationError("Этот аккаунт заблокирован!")
         return cleaned_data
 
