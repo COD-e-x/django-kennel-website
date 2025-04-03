@@ -31,7 +31,8 @@ build/
 
 # Секреты и ключи
 *.env
-.env.*
+.env.prod
 
 # Мои записи
 Notes/
+.init.sql
